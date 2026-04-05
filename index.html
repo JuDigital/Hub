@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Master Manifestor 888 | Ju</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --pink:#f472b6;--pink2:#ec4899;--pink-bg:rgba(244,114,182,0.1);--pink-border:rgba(244,114,182,0.25);
+  --green:#4ade80;--green-bg:rgba(74,222,128,0.08);--green-border:rgba(74,222,128,0.22);
+  --purple:#c084fc;--purple2:#a855f7;--purple-bg:rgba(192,132,252,0.1);--purple-border:rgba(192,132,252,0.25);
+  --bg:#07040e;--bg2:#0d0919;--bg3:#130d22;
+  --surf:rgba(255,255,255,0.04);--bord:rgba(255,255,255,0.07);--bord2:rgba(255,255,255,0.12);
+  --txt:#f0e8ff;--muted:#8a7aa8;--radius:16px;--radius-sm:10px;
+}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px);}to{opacity:1;transform:translateY(0);}}
+@keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@keyframes orb1{0%,100%{transform:translate(0,0);}50%{transform:translate(40px,-30px);}}
+@keyframes orb2{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,40px);}}
+@keyframes quizGlow{0%,100%{box-shadow:0 0 20px rgba(192,132,252,0.15),0 0 40px rgba(244,114,182,0.08);}50%{box-shadow:0 0 35px rgba(192,132,252,0.3),0 0 60px rgba(244,114,182,0.15);}}
+@keyframes pulseBtn{0%,100%{transform:scale(1);}50%{transform:scale(1.02);}}
+
+.orb{position:fixed;border-radius:50%;filter:blur(90px);pointer-events:none;z-index:0;}
+.orb1{width:500px;height:500px;background:rgba(192,132,252,0.07);top:-100px;left:-100px;animation:orb1 12s ease-in-out infinite;}
+.orb2{width:400px;height:400px;background:rgba(244,114,182,0.06);bottom:-80px;right:-80px;animation:orb2 10s ease-in-out infinite;}
+
+/* STICKY HEADER */
+.sticky-header{position:fixed;top:0;left:0;right:0;z-index:200;}
+.ticker-wrap{overflow:hidden;white-space:nowrap;background:rgba(7,4,14,0.97);border-bottom:0.5px solid var(--purple-border);}
+.ticker-inner{display:inline-block;animation:ticker 36s linear infinite;padding:9px 0;font-family:'Cormorant Garamond',serif;font-size:14px;font-style:italic;color:rgba(255,255,255,0.5);letter-spacing:0.04em;}
+nav{background:rgba(7,4,14,0.97);backdrop-filter:blur(14px);border-bottom:0.5px solid var(--bord);padding:13px 28px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+.nav-brand{display:flex;flex-direction:column;line-height:1.3;text-decoration:none;cursor:pointer;}
+.nav-brand-text{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.14em;font-weight:600;background:linear-gradient(135deg,var(--pink),var(--purple),var(--green));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.35;}
+.nav-tabs{display:flex;gap:4px;flex-wrap:wrap;}
+.nav-tab{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.1em;padding:7px 13px;border-radius:999px;border:0.5px solid var(--bord2);background:transparent;color:var(--muted);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.nav-tab.active{background:var(--pink-bg);color:var(--pink);border-color:var(--pink-border);}
+.nav-tab:hover:not(.active){color:var(--txt);}
+.nav-home{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;letter-spacing:0.06em;display:flex;align-items:center;gap:4px;transition:color 0.2s;}
+.nav-home:hover{color:var(--pink);}
+
+/* CONTENT OFFSET */
+.content-wrap{padding-top:80px;}
+
+/* TAB PANELS */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
+.page{max-width:680px;margin:0 auto;padding:40px 24px 60px;}
+
+/* LINKTREE HERO */
+.lt-hero{text-align:center;padding:48px 24px 32px;max-width:580px;margin:0 auto;}
+.lt-eyes{font-size:28px;letter-spacing:6px;margin-bottom:16px;animation:fadeUp 0.5s ease both;}
+.lt-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--green);text-transform:uppercase;margin-bottom:12px;animation:fadeUp 0.5s 0.1s ease both;opacity:0;}
+.lt-name{font-family:'Cinzel',serif;font-size:clamp(24px,5vw,42px);font-weight:600;line-height:1.1;margin-bottom:10px;animation:fadeUp 0.5s 0.2s ease both;opacity:0;}
+.lt-bio{font-family:'Georgia',serif;font-size:16px;font-style:italic;color:var(--muted);line-height:1.7;margin-bottom:32px;animation:fadeUp 0.5s 0.3s ease both;opacity:0;}
+
+/* LINKTREE LINKS */
+.lt-links{display:flex;flex-direction:column;gap:12px;max-width:520px;margin:0 auto 40px;animation:fadeUp 0.5s 0.35s ease both;opacity:0;}
+.lt-link{display:flex;align-items:center;gap:14px;background:var(--bg2);border:0.5px solid var(--bord2);border-radius:var(--radius);padding:16px 20px;text-decoration:none;transition:all 0.2s;cursor:pointer;width:100%;}
+.lt-link:hover{transform:translateY(-2px);}
+.lt-link.ll-pink{border-color:var(--pink-border);}.lt-link.ll-pink:hover{background:var(--pink-bg);}
+.lt-link.ll-purple{border-color:var(--purple-border);}.lt-link.ll-purple:hover{background:var(--purple-bg);}
+.lt-link.ll-green{border-color:var(--green-border);}.lt-link.ll-green:hover{background:var(--green-bg);}
+.ll-icon{font-size:22px;flex-shrink:0;}
+.ll-info{flex:1;text-align:left;}
+.ll-title{font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.06em;margin-bottom:3px;text-align:left;}
+.ll-sub{font-size:12px;color:var(--muted);line-height:1.5;text-align:left;}
+.ll-arrow{font-size:16px;color:var(--muted);flex-shrink:0;}
+
+/* SOCIALS */
+.lt-socials{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;animation:fadeUp 0.5s 0.4s ease both;opacity:0;}
+.lt-social{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;padding:14px 18px;background:var(--bg2);border:0.5px solid var(--bord2);border-radius:var(--radius);transition:border-color 0.2s;min-width:90px;}
+.lt-social:hover{border-color:var(--pink-border);}
+.lt-social svg{display:block;}
+.lt-social-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--muted);}
+
+/* QUIZ */
+.quiz-headline{text-align:center;margin-bottom:20px;}
+.quiz-headline-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.18em;color:var(--green);text-transform:uppercase;margin-bottom:8px;}
+.quiz-headline-title{font-family:'Cinzel',serif;font-size:clamp(18px,3vw,26px);color:var(--txt);margin-bottom:6px;}
+.quiz-headline-sub{font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--muted);}
+.quiz-card{background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:var(--radius);overflow:hidden;animation:quizGlow 3s ease-in-out infinite;max-width:640px;margin:0 auto;}
+.quiz-prog-bar{height:3px;background:var(--bg3);}
+.quiz-fill{height:3px;background:linear-gradient(90deg,var(--purple2),var(--pink2));transition:width 0.45s ease;width:0%;}
+.quiz-body{padding:32px 28px 24px;}
+.quiz-step-lbl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--muted);margin-bottom:14px;}
+.quiz-q{font-family:'Cinzel',serif;font-size:clamp(15px,2.5vw,20px);color:var(--txt);margin-bottom:6px;line-height:1.4;letter-spacing:0.04em;}
+.quiz-hint{font-family:'Georgia',serif;font-size:14px;font-style:italic;color:var(--muted);margin-bottom:20px;}
+.quiz-opts{display:flex;flex-direction:column;gap:10px;}
+.quiz-opt{background:var(--surf);border:0.5px solid var(--bord2);border-radius:var(--radius-sm);padding:14px 16px;cursor:pointer;font-size:13px;color:var(--txt);text-align:left;transition:all 0.2s;line-height:1.5;display:flex;gap:10px;align-items:flex-start;}
+.quiz-opt:hover{background:var(--purple-bg);border-color:var(--purple-border);}
+.quiz-opt.selected{background:var(--purple-bg);border-color:var(--purple);color:var(--purple);}
+.quiz-opt-icon{font-size:18px;flex-shrink:0;margin-top:1px;}
+.quiz-foot{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-top:0.5px solid var(--bord);}
+.quiz-back{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:none;border:none;cursor:pointer;letter-spacing:0.06em;}
+.quiz-back:hover{color:var(--txt);}
+.quiz-next{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.12em;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:#fff;border:none;border-radius:999px;padding:11px 28px;cursor:pointer;opacity:0.3;pointer-events:none;transition:opacity 0.2s;}
+.quiz-next.on{opacity:1;pointer-events:all;animation:pulseBtn 2s ease-in-out infinite;}
+.result-card{display:none;padding:36px 28px;text-align:center;}
+.result-eyes{font-size:28px;letter-spacing:5px;margin-bottom:14px;}
+.result-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--green);margin-bottom:10px;}
+.result-title{font-family:'Cinzel',serif;font-size:clamp(18px,3.5vw,28px);margin-bottom:10px;line-height:1.2;}
+.result-desc{font-family:'Georgia',serif;font-size:16px;font-style:italic;color:var(--muted);line-height:1.75;margin-bottom:24px;max-width:440px;margin-left:auto;margin-right:auto;}
+.result-cta{display:inline-block;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.12em;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:#fff;border-radius:999px;padding:14px 36px;text-decoration:none;transition:opacity 0.2s;margin-bottom:14px;}
+.result-cta:hover{opacity:0.85;}
+.result-retake{display:block;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);cursor:pointer;text-decoration:underline;}
+
+/* ABOUT */
+.about-card{background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:var(--radius);padding:32px;margin-bottom:16px;}
+.about-short{font-family:'Georgia',serif;font-size:17px;line-height:1.85;color:var(--txt);}
+.ahl-pink{color:var(--pink);font-style:normal;font-weight:600;}
+.ahl-green{color:var(--green);font-style:normal;font-weight:600;}
+.ahl-purple{color:var(--purple);font-style:normal;font-weight:600;}
+.expand-btn{display:block;margin:20px auto 0;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;background:transparent;color:var(--purple);border:0.5px solid var(--purple-border);border-radius:999px;padding:10px 24px;cursor:pointer;transition:all 0.2s;}
+.expand-btn:hover{background:var(--purple-bg);}
+.about-long{display:none;margin-top:20px;padding-top:20px;border-top:0.5px solid var(--bord);font-family:'Georgia',serif;font-size:16px;line-height:1.85;color:var(--txt);}
+.about-long p{margin-bottom:16px;}
+.about-long p:last-child{margin-bottom:0;}
+.creds-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-top:20px;}
+.cred-pill{background:var(--bg3);border:0.5px solid var(--bord2);border-radius:var(--radius-sm);padding:12px;text-align:center;}
+.cred-pill-icon{font-size:18px;margin-bottom:5px;}
+.cred-pill-label{font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.08em;}
+
+/* DECKS OVERLAY */
+#deckOverlay{display:none;position:fixed;inset:0;z-index:300;background:var(--bg);overflow-y:auto;}
+.deck-overlay-inner{max-width:860px;margin:0 auto;padding:100px 24px 60px;}
+.deck-close{position:fixed;top:90px;right:24px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);background:var(--bg2);border:0.5px solid var(--bord2);border-radius:999px;padding:8px 18px;cursor:pointer;z-index:310;letter-spacing:0.06em;}
+.deck-close:hover{color:var(--pink);border-color:var(--pink-border);}
+.deck-header{text-align:center;margin-bottom:36px;}
+.deck-collection-card{background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:var(--radius);padding:28px;margin-bottom:24px;text-align:center;}
+.deck-card{background:var(--bg2);border-radius:var(--radius);overflow:hidden;margin-bottom:18px;}
+.deck-card-top{padding:24px 28px;border-bottom-width:0.5px;border-bottom-style:solid;}
+.deck-card-body{padding:24px 28px;}
+.deck-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px;}
+.deck-col-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;margin-bottom:10px;}
+.deck-col-text{font-size:13px;color:var(--muted);line-height:1.78;}
+
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:0.5px solid var(--bord);padding:36px 24px;text-align:center;max-width:680px;margin:0 auto;}
+.footer-brand{font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;color:var(--txt);margin-bottom:4px;}
+.footer-sub{font-family:'Georgia',serif;font-size:14px;font-style:italic;color:var(--muted);margin-bottom:20px;}
+.footer-socials{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:20px;}
+.footer-social{display:flex;flex-direction:column;align-items:center;gap:5px;text-decoration:none;padding:12px 16px;background:var(--bg2);border:0.5px solid var(--bord2);border-radius:var(--radius);transition:border-color 0.2s;min-width:80px;}
+.footer-social:hover{border-color:var(--pink-border);}
+.footer-social-label{font-family:'Cinzel',serif;font-size:9px;letter-spacing:0.1em;color:var(--muted);}
+.footer-copy{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:0.06em;}
+
+@media(max-width:600px){
+  nav{padding:10px 16px;flex-wrap:wrap;gap:8px;}
+  .nav-tabs{gap:3px;}.nav-tab{font-size:9px;padding:6px 10px;}
+  .page{padding:28px 16px 48px;}
+  .quiz-body{padding:22px 16px 16px;}.quiz-foot{padding:12px 16px;}
+  .result-card{padding:24px 16px;}
+  .deck-grid{grid-template-columns:1fr;}
+  .content-wrap{padding-top:88px;}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+
+<!-- STICKY HEADER -->
+<div class="sticky-header">
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      &nbsp;&nbsp;&nbsp;🧿 Master Manifestor 888 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✨ Psychic. Medium. Life Coach. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🧿 Transformation. Ancestral Healing. Manifestation. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✨ "No weapon formed against you shall prosper." Isaiah 54:17 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🧿 Master Manifestor 888 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✨ Psychic. Medium. Life Coach. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 🧿 Transformation. Ancestral Healing. Manifestation. &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ✨ "No weapon formed against you shall prosper." Isaiah 54:17 &nbsp;&nbsp;&nbsp;
+    </div>
+  </div>
+  <nav>
+    <a class="nav-brand" onclick="goHome()">
+      <span class="nav-brand-text">Master</span>
+      <span class="nav-brand-text">Manifestor</span>
+      <span class="nav-brand-text">888</span>
+    </a>
+    <div class="nav-tabs">
+      <button class="nav-tab active" onclick="switchTab('home',this)">Home</button>
+      <button class="nav-tab" onclick="switchTab('quiz',this)">Find Your Path</button>
+      <button class="nav-tab" onclick="switchTab('about',this)">About Ju</button>
+      <button class="nav-tab" onclick="openDecks()">Oracle Decks</button>
+      <button class="nav-tab" onclick="switchTab('reviews',this)">Reviews</button>
+    </div>
+  </nav>
+</div>
+
+<div class="content-wrap">
+
+<!-- HOME TAB -->
+<div class="tab-panel active" id="tab-home">
+  <div class="lt-hero">
+    <div class="lt-eyes">🧿 🧿 🧿</div>
+    <div class="lt-tag">Master Manifestor 888</div>
+    <h1 class="lt-name">
+      <span style="color:var(--pink);">Deep Down You Know</span><br>
+      <span style="color:var(--purple);">It Is Time for</span><br>
+      <span style="color:var(--green);">Something to Shift.</span>
+    </h1>
+    <p class="lt-bio">Something brought you here. Whether it was a sign, a feeling, or a season of life asking you to go deeper, trust that. This is the home of Master Manifestor 888. Find exactly where your journey begins.</p>
+  </div>
+
+  <div class="page" style="padding-top:0;">
+    <div style="background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(244,114,182,0.07));border:0.5px solid var(--purple-border);border-radius:12px;padding:16px 20px;margin-bottom:16px;text-align:center;">
+      <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--txt);margin-bottom:4px;letter-spacing:0.06em;">Not sure where to start?</div>
+      <div style="font-family:'Georgia',serif;font-size:13px;font-style:italic;color:var(--muted);margin-bottom:12px;">Take the quiz and find your path in under 2 minutes.</div>
+      <button onclick="switchTab('quiz',document.querySelectorAll('.nav-tab')[1])" style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:#fff;border:none;border-radius:999px;padding:10px 24px;cursor:pointer;">Take the Quiz to Find Your Path ✨</button>
+    </div>
+    <div class="lt-links">
+      <a class="lt-link ll-pink" href="https://judigital.github.io/Book-a-Reading-/#readings" target="_blank">
+        <span class="ll-icon">🔮</span>
+        <div class="ll-info">
+          <div class="ll-title" style="color:var(--pink);">Book a Psychic or Mediumship Reading</div>
+          <div class="ll-sub">Private sessions with Ju. Clarity, ancestral messages, and real answers.</div>
+        </div>
+        <span class="ll-arrow">&#8594;</span>
+      </a>
+      <a class="lt-link ll-purple" href="https://judigital.github.io/Digital-Shop/" target="_blank">
+        <span class="ll-icon">📜</span>
+        <div class="ll-info">
+          <div class="ll-title" style="color:var(--purple);">E-Books, Written Petitions & Scripture Lists</div>
+          <div class="ll-sub">Digital guides for justice, love, money, protection, and more.</div>
+        </div>
+        <span class="ll-arrow">&#8594;</span>
+      </a>
+      <button class="lt-link ll-green" onclick="openDecks()">
+        <span class="ll-icon">🃏</span>
+        <div class="ll-info">
+          <div class="ll-title" style="color:var(--green);">Mediumship Oracle Decks</div>
+          <div class="ll-sub">Three original decks created by Ju for spiritual gift development.</div>
+        </div>
+        <span class="ll-arrow">&#8594;</span>
+      </button>
+      <a class="lt-link ll-pink" href="https://judigital.github.io/Spiritual-Life-Coaching/" target="_blank">
+        <span class="ll-icon">🌱</span>
+        <div class="ll-info">
+          <div class="ll-title" style="color:var(--pink);">Spiritual Life Coaching & Mentorship</div>
+          <div class="ll-sub">Monthly mentorship for women on a spiritual journey. $2,222 per month.</div>
+        </div>
+        <span class="ll-arrow">&#8594;</span>
+      </a>
+      <button class="lt-link ll-purple" onclick="switchTab('quiz',document.querySelectorAll('.nav-tab')[1])">
+        <span class="ll-icon">✨</span>
+        <div class="ll-info">
+          <div class="ll-title" style="color:var(--purple);">Not Sure Where to Start?</div>
+          <div class="ll-sub">Take the quiz. Four questions. One direct link to exactly what you need.</div>
+        </div>
+        <span class="ll-arrow">&#8594;</span>
+      </button>
+    </div>
+
+    <div class="lt-socials">
+      <a class="lt-social" href="https://tiktok.com/@master_manifestor888" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.34 6.34 0 00-6.34 6.33 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.18 8.18 0 004.78 1.52V6.76a4.85 4.85 0 01-1-.07z" fill="#f472b6"/></svg>
+        <span class="lt-social-label" style="color:var(--pink);">TikTok</span>
+      </a>
+      <a class="lt-social" href="https://instagram.com/Mastermanifestor888" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="#c084fc" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="#c084fc" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="#c084fc"/></svg>
+        <span class="lt-social-label" style="color:var(--purple);">Instagram</span>
+      </a>
+      <a class="lt-social" href="https://youtube.com/@Mastermanifestor888" target="_blank">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z" stroke="#4ade80" stroke-width="1.5"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#4ade80"/></svg>
+        <span class="lt-social-label" style="color:var(--green);">YouTube</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- QUIZ TAB -->
+<div class="tab-panel" id="tab-quiz">
+  <div class="page">
+    <div class="quiz-headline">
+      <div class="quiz-headline-tag">✨ Start Here</div>
+      <div class="quiz-headline-title">Find Your Path with Ju</div>
+      <div class="quiz-headline-sub">Four questions. One result. Your direct link to exactly where you need to start.</div>
+    </div>
+    <div class="quiz-card" id="quizCard">
+      <div class="quiz-prog-bar"><div class="quiz-fill" id="qFill"></div></div>
+      <div class="quiz-body" id="qBody">
+        <div class="quiz-step-lbl" id="qStepLbl"></div>
+        <div class="quiz-q" id="qQ"></div>
+        <div class="quiz-hint" id="qHint"></div>
+        <div class="quiz-opts" id="qOpts"></div>
+      </div>
+      <div class="result-card" id="qResult"></div>
+      <div class="quiz-foot" id="qFoot">
+        <button class="quiz-back" id="qBackBtn" onclick="qBack()" style="visibility:hidden;">back</button>
+        <button class="quiz-next on" id="qNextBtn" onclick="qNext()">Begin ✨</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT TAB -->
+<div class="tab-panel" id="tab-about">
+  <div class="page">
+    <div style="text-align:center;margin-bottom:28px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.16em;color:var(--green);text-transform:uppercase;margin-bottom:10px;">The Woman Behind the Work</div>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,36px);margin-bottom:0;"><span style="color:var(--pink);">Who</span> <span style="color:var(--purple);">Is</span> <span style="color:var(--green);">Ju?</span></h2>
+    </div>
+    <div class="about-card">
+      <div class="about-short">
+        Ju has been spiritually gifted <span class="ahl-purple">since early childhood</span>, sensing spirits, experiencing paranormal activity, and receiving things she had no language for yet. What once brought fear eventually became her greatest calling. She has been working with clients <span class="ahl-pink">professionally since 2020</span> but the gifts go back much further. Today she is not just doing readings. She is <span class="ahl-purple">training mediums and psychics in development</span>, helping them understand their gifts for peace of mind and to build their own practice. She holds <span class="ahl-green">two master degrees</span>, is a proud member of <span class="ahl-pink">Alpha Kappa Alpha Sorority, Incorporated</span>, and has built everything she has through real inner work, real alignment, and real sacrifice.
+      </div>
+      <button class="expand-btn" id="expandBtn" onclick="toggleAbout()">Read the Full Story ↓</button>
+      <div class="about-long" id="aboutLong">
+        <p>From a young age Ju was experiencing things others around her could not explain. Seeing spirits. Paranormal activity that no one could make sense of. Feeling things shift in a room before anything was said. It was not always comfortable. For a long time it was frightening. She was raised with a <span class="ahl-purple">deep foundation of faith</span> and over time came to understand that honoring her ancestors was also part of her path. Both have always been true at the same time.</p>
+        <p>She did not wait until everything was easy to build. She worked overnight shifts while in school full time, barely sleeping, writing her desires in present tense every single morning before she even knew what scripting was. She <span class="ahl-green">manifested her way back to Houston</span>, the city she had always dreamed of, and built her life there from scratch.</p>
+        <p>In 2020 she launched her business officially. She <span class="ahl-pink">created three original oracle decks</span> from real spiritual downloads and lived experience. Her YouTube channel grew because people could feel that what she was doing was real. She was not performing. She was connecting.</p>
+        <p>Since then she has <span class="ahl-purple">mentored thousands of students</span>, led a spiritual community active since 2020, and built a coaching practice that now trains mediums and psychics in development. She does not just teach people how to manifest. <span class="ahl-green">She teaches them how to become who they were always meant to be.</span></p>
+      </div>
+      <div class="creds-strip">
+        <div class="cred-pill"><div class="cred-pill-icon">🔮</div><div class="cred-pill-label" style="color:var(--pink);">Psychic Medium</div></div>
+        <div class="cred-pill"><div class="cred-pill-icon">🎓</div><div class="cred-pill-label" style="color:var(--purple);">Two Master Degrees</div></div>
+        <div class="cred-pill"><div class="cred-pill-icon">🌱</div><div class="cred-pill-label" style="color:var(--green);">Thousands Mentored</div></div>
+        <div class="cred-pill"><div class="cred-pill-icon">🃏</div><div class="cred-pill-label" style="color:var(--pink);">Three Oracle Decks</div></div>
+      </div>
+    </div>
+  </div>
+
+    <!-- WHAT MAKES JU DIFFERENT -->
+    <div style="margin-top:36px;">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--green);text-transform:uppercase;margin-bottom:8px;text-align:center;">Why Ju Is Different</div>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(18px,3vw,26px);text-align:center;margin-bottom:20px;"><span style="color:var(--pink);">A Spiritual Life Coach.</span> <span style="color:var(--purple);">Not Just a Life Coach.</span></h2>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--pink-border);border-radius:12px;padding:20px;margin-bottom:10px;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.08em;color:var(--pink);margin-bottom:8px;">🔮 You have been praying but nothing is moving.</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;color:var(--muted);line-height:1.75;">Most people come to Ju after years of prayer with no direction, no structure, and no results. <span style="color:var(--pink);font-style:normal;font-weight:600;">A monthly mediumship reading is built into every mentorship subscription.</span> Direct messages from your spirit team every single month. No other life coach offers this.</div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:12px;padding:20px;margin-bottom:10px;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.08em;color:var(--purple);margin-bottom:8px;">🌱 You know you have gifts but you do not trust them.</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;color:var(--muted);line-height:1.75;">Second guessing every message you receive is exhausting. Ju teaches you divination so you can hear your own spirit team. <span style="color:var(--purple);font-style:normal;font-weight:600;">By the time you are deep in this work, you trust yourself.</span> She builds your independence, not your dependence.</div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--green-border);border-radius:12px;padding:20px;margin-bottom:10px;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.08em;color:var(--green);margin-bottom:8px;">🌑 You are carrying grief or generational trauma with nowhere to put it.</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;color:var(--muted);line-height:1.75;">Ju goes where other coaches will not. Grief. Generational trauma. Spiritual identity. Heavy sacred things. <span style="color:var(--green);font-style:normal;font-weight:600;">She has the gifts and lived experience to hold space for all of it.</span> This is a calling, not a career pivot.</div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--pink-border);border-radius:12px;padding:20px;margin-bottom:10px;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.08em;color:var(--pink);margin-bottom:8px;">🧬 You cannot figure out why you are still stuck even though you see your patterns.</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;color:var(--muted);line-height:1.75;">Knowing is not the same as healing. Ju combines shadow work, ancestral healing, and spiritual gift development into one relationship. <span style="color:var(--pink);font-style:normal;font-weight:600;">Whether you know your biological family or not, she connects you to your lineage.</span> She has helped women reconnect to lineage they never knew, including those who were adopted.</div>
+      </div>
+
+      <div style="background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:12px;padding:20px;">
+        <div style="font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.08em;color:var(--purple);margin-bottom:8px;">📹 Your readings are recorded and yours forever.</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;color:var(--muted);line-height:1.75;">Every monthly reading is recorded on YouTube, private or public based on your preference. <span style="color:var(--purple);font-style:normal;font-weight:600;">Rewatch anytime.</span> The messages stay with you as a real record of your growth.</div>
+      </div>
+    </div>
+</div>
+
+<!-- DECK OVERLAY -->
+
+<!-- TAB: REVIEWS -->
+<div class="tab-panel" id="tab-reviews">
+  <div class="page">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--green);text-transform:uppercase;margin-bottom:6px;text-align:center;">Google Reviews</div>
+    <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--green);text-transform:uppercase;margin-bottom:8px;text-align:center;">Google Reviews</div><h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,30px);text-align:center;margin-bottom:24px;"><span style="color:var(--pink);">Real Transformation.</span> <span style="color:var(--purple);">Real Results.</span></h2>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="background:var(--bg2);border:0.5px solid var(--pink-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"Ju is a <span style="color:var(--pink);font-style:normal;font-weight:600;">God send</span>. The ancestor readings she offers <span style="color:var(--pink);font-style:normal;font-weight:600;">ain't no joke</span>. Words cannot express the feelings you get when you experience her readings. It is <span style="color:var(--pink);font-style:normal;font-weight:600;">more than a transaction</span> for her. Such a beautiful soul."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">L. Bailey</div></div>
+      <div style="background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"She is <span style="color:var(--pink);font-style:normal;font-weight:600;">NO CAP</span>. My life has done a <span style="color:var(--pink);font-style:normal;font-weight:600;">complete 180</span> in only 6 to 7 months. I thought I had already healed certain things but I learned I had barely scratched the surface. My life is so much better. You <span style="color:var(--pink);font-style:normal;font-weight:600;">cannot go wrong with her</span>."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">L. Ledbetter</div></div>
+      <div style="background:var(--bg2);border:0.5px solid var(--green-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"<span style="color:var(--pink);font-style:normal;font-weight:600;">100% authentic</span> and effective. She is self-made, the true definition of what you see is what you get. This is the place where all your dreams come alive. Have no fear, Master Manifestor is here."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">Resilience Babe</div></div>
+      <div style="background:var(--bg2);border:0.5px solid var(--pink-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"Her knowledge of her gift and craft is <span style="color:var(--pink);font-style:normal;font-weight:600;">beyond her years</span>. I have <span style="color:var(--pink);font-style:normal;font-weight:600;">grown tremendously</span> being in her Mentorship Program. She instructs with so much empathy and compassion. She has a heart for helping people."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">S. Hunt</div></div>
+      <div style="background:var(--bg2);border:0.5px solid var(--purple-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"The place I was in had me <span style="color:var(--pink);font-style:normal;font-weight:600;">ready to give up on life</span>. Because I reached out, I was given insight that is <span style="color:var(--pink);font-style:normal;font-weight:600;">still keeping me fighting</span>. She spoke things I had <span style="color:var(--pink);font-style:normal;font-weight:600;">never told anyone</span>. It opened my eyes completely."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">M. Warren</div></div>
+      <div style="background:var(--bg2);border:0.5px solid var(--green-border);border-radius:12px;padding:20px;"><div style="font-size:13px;margin-bottom:8px;">⭐⭐⭐⭐⭐</div><div style="font-family:'Georgia',serif;font-size:15px;font-style:italic;color:var(--txt);line-height:1.75;margin-bottom:8px;">"She <span style="color:var(--pink);font-style:normal;font-weight:600;">never misses</span>. She is <span style="color:var(--pink);font-style:normal;font-weight:600;">TOP TIER</span> in everything. Give her a chance and she will make your life better and pour <span style="color:var(--pink);font-style:normal;font-weight:600;">pure love</span> inside of you. I am not just saying this. Pure facts."</div><div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);">B. Kidd</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="deckOverlay">
+  <button class="deck-close" onclick="closeDecks()">&#8592; Back</button>
+  <div class="deck-overlay-inner">
+    <div class="deck-header">
+      <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.14em;color:var(--green);margin-bottom:10px;">Created by Ju</div>
+      <h2 style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,36px);background:linear-gradient(135deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px;">Mediumship Oracle Collection</h2>
+      <div style="font-family:'Georgia',serif;font-size:16px;font-style:italic;color:var(--muted);line-height:1.7;max-width:520px;margin:0 auto;">Three original decks created from real spiritual downloads, lived experience, and a calling to help others connect to their spirit team. Not affirmation cards. Real tools.</div>
+    </div>
+
+    <div class="deck-collection-card">
+      <div style="font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--purple);font-weight:300;line-height:1;margin-bottom:6px;">$252.22</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:0.08em;margin-bottom:18px;">per deck &nbsp;|&nbsp; select at checkout &nbsp;|&nbsp; allow up to 2 weeks for delivery</div>
+      <a href="https://www.mastermanifestor888readings.com/product/mediumship-oracle-collection/45?cs=true&cst=custom" target="_blank" style="display:inline-block;font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.12em;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:#fff;border-radius:999px;padding:15px 38px;text-decoration:none;">Shop the Collection</a>
+    </div>
+
+    <!-- DECK 1 -->
+    <div class="deck-card" style="border:0.5px solid var(--pink-border);">
+      <div class="deck-card-top" style="background:linear-gradient(135deg,rgba(244,114,182,0.1),rgba(192,132,252,0.07));border-bottom-color:var(--pink-border);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--pink);margin-bottom:8px;">Deck 01 of 03</div>
+        <div style="font-family:'Cinzel',serif;font-size:20px;color:var(--pink);margin-bottom:4px;">Skin Folk Mediumship Oracle</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;font-style:italic;color:var(--muted);">Ju's signature deck for mediumship development</div>
+      </div>
+      <div class="deck-card-body">
+        <div style="font-family:'Georgia',serif;font-size:15px;color:var(--txt);line-height:1.8;margin-bottom:20px;">The Skin Folk Oracle was created to help you build confidence in your spiritual abilities. Every message in this deck is channeled directly from Ju's personal spiritual experiences. It strengthens your connection to your spirit team, helps you recognize their guidance when it comes through, and teaches you to trust what you receive without second guessing yourself.</div>
+        <div class="deck-grid">
+          <div><div class="deck-col-title" style="color:var(--pink);">WHAT IS INCLUDED</div><div class="deck-col-text">100+ high quality channeled cards<br>Focused on mediumship development<br>Built for intuitive trust<br>No guidebook included</div></div>
+          <div><div class="deck-col-title" style="color:var(--pink);">BEST FOR</div><div class="deck-col-text">Mediums and intuitive readers<br>Spiritual coaches and practitioners<br>Actively developing your gifts<br>Hearing your spirit team more clearly</div></div>
+        </div>
+        <a href="https://www.mastermanifestor888readings.com/product/mediumship-oracle-collection/45?cs=true&cst=custom" target="_blank" style="display:inline-block;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;background:var(--pink-bg);color:var(--pink);border:0.5px solid var(--pink-border);border-radius:999px;padding:11px 24px;text-decoration:none;">Get Skin Folk Oracle &#8594;</a>
+      </div>
+    </div>
+
+    <!-- DECK 2 -->
+    <div class="deck-card" style="border:0.5px solid var(--purple-border);">
+      <div class="deck-card-top" style="background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(244,114,182,0.07));border-bottom-color:var(--purple-border);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--purple);margin-bottom:8px;">Deck 02 of 03</div>
+        <div style="font-family:'Cinzel',serif;font-size:20px;color:var(--purple);margin-bottom:4px;">Mysteries of the Universe Oracle</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;font-style:italic;color:var(--muted);">100+ hand drawn cards for shadow work and spiritual awakening</div>
+      </div>
+      <div class="deck-card-body">
+        <div style="font-family:'Georgia',serif;font-size:15px;color:var(--txt);line-height:1.8;margin-bottom:20px;">The digital art version of Ju's first hand drawn oracle deck, created during a major shift in her own spiritual journey. This deck came from moments of silence, breakthroughs, downloads, and lessons that shaped who she is today. Direct, insightful, and built to support deep personal growth. If you are going through a spiritual awakening or trying to find clarity during a difficult season, this deck meets you exactly where you are.</div>
+        <div class="deck-grid">
+          <div><div class="deck-col-title" style="color:var(--purple);">WHAT IS INCLUDED</div><div class="deck-col-text">100+ hand drawn cards<br>Supports shadow work and clarity<br>Based on real spiritual messages<br>Built for emotional release</div></div>
+          <div><div class="deck-col-title" style="color:var(--purple);">BEST FOR</div><div class="deck-col-text">People in spiritual transformation<br>Seeking clarity in hard seasons<br>Shadow work and healing<br>Going deeper within yourself</div></div>
+        </div>
+        <a href="https://www.mastermanifestor888readings.com/product/mediumship-oracle-collection/45?cs=true&cst=custom" target="_blank" style="display:inline-block;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;background:var(--purple-bg);color:var(--purple);border:0.5px solid var(--purple-border);border-radius:999px;padding:11px 24px;text-decoration:none;">Get Mysteries of the Universe &#8594;</a>
+      </div>
+    </div>
+
+    <!-- DECK 3 -->
+    <div class="deck-card" style="border:0.5px solid var(--green-border);">
+      <div class="deck-card-top" style="background:linear-gradient(135deg,rgba(74,222,128,0.07),rgba(192,132,252,0.07));border-bottom-color:var(--green-border);">
+        <div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:0.12em;color:var(--green);margin-bottom:8px;">Deck 03 of 03</div>
+        <div style="font-family:'Cinzel',serif;font-size:20px;color:var(--green);margin-bottom:4px;">Supernatural South Oracle</div>
+        <div style="font-family:'Georgia',serif;font-size:14px;font-style:italic;color:var(--muted);">Culturally rooted ancestral guidance from the South</div>
+      </div>
+      <div class="deck-card-body">
+        <div style="font-family:'Georgia',serif;font-size:15px;color:var(--txt);line-height:1.8;margin-bottom:20px;">A culturally rooted oracle deck based on Ju's upbringing in Arkansas. This deck brings together Southern sayings, ancestral messages, and spiritual truth passed down from generation to generation. These cards are direct, familiar, and real. They speak in a way that feels personal and grounded. This deck is about remembering your roots and receiving guidance from the wisdom of those who came before you.</div>
+        <div class="deck-grid">
+          <div><div class="deck-col-title" style="color:var(--green);">WHAT IS INCLUDED</div><div class="deck-col-text">100+ cards with Southern sayings<br>Ancestral messages and oral tradition<br>Based on real cultural experience<br>No guidebook included</div></div>
+          <div><div class="deck-col-title" style="color:var(--green);">BEST FOR</div><div class="deck-col-text">People with Southern roots<br>Honoring your ancestors<br>Direct unfiltered guidance<br>Cultural depth over generic messages</div></div>
+        </div>
+        <a href="https://www.mastermanifestor888readings.com/product/mediumship-oracle-collection/45?cs=true&cst=custom" target="_blank" style="display:inline-block;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.1em;background:var(--green-bg);color:var(--green);border:0.5px solid var(--green-border);border-radius:999px;padding:11px 24px;text-decoration:none;">Get Supernatural South &#8594;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Master Manifestor 888</div>
+  <div class="footer-sub">by Ju at Master Manifestation Coaching</div>
+  <div class="footer-copy">Copyright 2026 Master Manifestor888, LLC. All rights reserved.</div>
+</footer>
+
+</div><!-- end content-wrap -->
+
+<script>
+// TABS
+function switchTab(name, btn){
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.nav-tab').forEach(function(b){b.classList.remove('active');});
+  var panel = document.getElementById('tab-'+name);
+  if(panel) panel.classList.add('active');
+  if(btn && btn.classList) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goHome(){
+  switchTab('home', document.querySelectorAll('.nav-tab')[0]);
+}
+
+// DECKS
+function openDecks(){
+  document.getElementById('deckOverlay').style.display='block';
+  document.body.style.overflow='hidden';
+  document.getElementById('deckOverlay').scrollTop=0;
+}
+function closeDecks(){
+  document.getElementById('deckOverlay').style.display='none';
+  document.body.style.overflow='';
+}
+
+// ABOUT EXPAND
+function toggleAbout(){
+  var long = document.getElementById('aboutLong');
+  var btn = document.getElementById('expandBtn');
+  if(long.style.display==='block'){
+    long.style.display='none';
+    btn.textContent='Read the Full Story \u2193';
+  } else {
+    long.style.display='block';
+    btn.textContent='Collapse \u2191';
+  }
+}
+
+// QUIZ
+var QS=[
+  {q:"Where are you right now?",hint:"Be honest. This is a safe space.",opts:[
+    {icon:"🌑",text:"Stuck, searching, or feeling like something is spiritually off"},
+    {icon:"💔",text:"Going through something painful and need real answers"},
+    {icon:"✨",text:"On my path and ready to go deeper in my gifts and practice"},
+    {icon:"💰",text:"Ready to invest in myself and my spiritual growth"}
+  ]},
+  {q:"What do you need most right now?",hint:"Trust your first instinct.",opts:[
+    {icon:"🔮",text:"Direct messages from spirit, a reading that gives me real clarity"},
+    {icon:"📜",text:"Tools I can use on my own, guides, petitions, and scripture lists"},
+    {icon:"🃏",text:"Oracle decks for mediumship development and intuitive connection"},
+    {icon:"🌱",text:"A coach who will walk with me through transformation over time"}
+  ]},
+  {q:"What area of life needs the most attention?",hint:"",opts:[
+    {icon:"⚖️",text:"Justice, legal matters, or a loved one who is incarcerated"},
+    {icon:"💕",text:"Love, relationships, or deep self healing and self love"},
+    {icon:"💸",text:"Money, career, or building something that creates real income"},
+    {icon:"🧬",text:"Spiritual awakening, ancestral healing, or gift development"}
+  ]},
+  {q:"How ready are you to invest in this work?",hint:"There is no wrong answer.",opts:[
+    {icon:"🌱",text:"I am just starting out and want something accessible to begin"},
+    {icon:"🔥",text:"I am ready for a private session or reading right now"},
+    {icon:"👑",text:"I want ongoing support and am serious about long term transformation"},
+    {icon:"🧿",text:"I want tools and resources I can study and practice on my own"}
+  ]}
+];
+
+var RESULTS={
+  reading:{color:"var(--pink)",eyes:"🔮 🧿 🔮",tag:"Your path: Private Readings",title:"You Need to Hear Directly from Spirit.",desc:"You are not looking for vague guidance. You need real answers and direct messages from your spirit team. A private reading with Ju delivers exactly that.",cta:"Book a Reading with Ju",link:"https://judigital.github.io/Book-a-Reading-/#readings"},
+  shop:{color:"var(--purple)",eyes:"📜 🧿 📜",tag:"Your path: Digital Guides",title:"You Are Ready to Do the Work Yourself.",desc:"You want the tools. The scriptures. The petitions. The knowledge that shifts real situations in love, money, justice, and protection.",cta:"Shop Guides and Petitions",link:"https://judigital.github.io/Digital-Shop/"},
+  decks:{color:"var(--green)",eyes:"🃏 🧿 🃏",tag:"Your path: Oracle Decks",title:"Your Gifts Are Asking to Be Developed.",desc:"Three original oracle decks by Ju. Real tools for mediumship development, intuitive trust, shadow work, and ancestral connection.",cta:"Shop the Oracle Collection",link:"https://www.mastermanifestor888readings.com/product/mediumship-oracle-collection/45?cs=true&cst=custom"},
+  coaching:{color:"var(--purple)",eyes:"🌱 🧿 🌱",tag:"Your path: Spiritual Life Coaching",title:"You Are Ready for Someone to Walk with You.",desc:"Monthly mentorship that walks with you through healing, spiritual development, and becoming, for as long as your journey requires.",cta:"Learn About Coaching with Ju",link:"https://judigital.github.io/Spiritual-Life-Coaching/"},
+  mini:{color:"var(--pink)",eyes:"✨ 🧿 ✨",tag:"Your path: Mini Guides",title:"Start Here. Go Deeper When You Are Ready.",desc:"For $44.44 you get a real foundation in petition writing or jail release spiritual work. The perfect place to begin.",cta:"See the Mini Guides",link:"https://judigital.github.io/Digital-Shop/#mini-guides"}
+};
+
+var answers=[],current=-1;
+
+function getResult(){
+  var s={reading:0,shop:0,decks:0,coaching:0,mini:0};
+  if(answers[0]===0||answers[0]===1) s.reading+=2;
+  if(answers[0]===2){s.decks+=1;s.coaching+=1;}
+  if(answers[0]===3) s.coaching+=2;
+  if(answers[1]===0) s.reading+=3;
+  if(answers[1]===1) s.shop+=3;
+  if(answers[1]===2) s.decks+=3;
+  if(answers[1]===3) s.coaching+=3;
+  if(answers[2]===0){s.shop+=1;s.reading+=1;}
+  if(answers[2]===1){s.reading+=1;s.shop+=1;}
+  if(answers[2]===2){s.shop+=1;s.reading+=1;}
+  if(answers[2]===3){s.decks+=1;s.coaching+=1;}
+  if(answers[3]===0) s.mini+=3;
+  if(answers[3]===1) s.reading+=2;
+  if(answers[3]===2) s.coaching+=3;
+  if(answers[3]===3) s.shop+=2;
+  var top='reading',max=0;
+  Object.keys(s).forEach(function(k){if(s[k]>max){max=s[k];top=k;}});
+  return RESULTS[top];
+}
+
+function renderQ(){
+  var d=QS[current];
+  document.getElementById('qStepLbl').textContent='Question '+(current+1)+' of '+QS.length;
+  document.getElementById('qFill').style.width=((current/QS.length)*100)+'%';
+  document.getElementById('qQ').textContent=d.q;
+  document.getElementById('qHint').textContent=d.hint;
+  var h='';
+  d.opts.forEach(function(o,i){
+    var sel=answers[current]===i?' selected':'';
+    h+='<button class="quiz-opt'+sel+'" onclick="pick(this,'+i+')">'
+      +'<span class="quiz-opt-icon">'+o.icon+'</span>'
+      +'<span>'+o.text+'</span>'
+      +'</button>';
+  });
+  document.getElementById('qOpts').innerHTML=h;
+  document.getElementById('qNextBtn').className='quiz-next'+(answers[current]!==undefined?' on':'');
+  document.getElementById('qNextBtn').textContent='Continue';
+  document.getElementById('qBackBtn').style.visibility=current>0?'visible':'hidden';
+  document.getElementById('qBody').style.display='block';
+  document.getElementById('qResult').style.display='none';
+  document.getElementById('qFoot').style.display='flex';
+}
+
+function showIntro(){
+  document.getElementById('qFill').style.width='0%';
+  document.getElementById('qStepLbl').textContent='';
+  document.getElementById('qQ').textContent='Your next level starts with knowing where you are.';
+  document.getElementById('qHint').textContent='Answer four questions and find exactly where your journey with Ju begins.';
+  document.getElementById('qOpts').innerHTML='';
+  document.getElementById('qNextBtn').className='quiz-next on';
+  document.getElementById('qNextBtn').textContent='Find Your Path \u2728';
+  document.getElementById('qBackBtn').style.visibility='hidden';
+  document.getElementById('qBody').style.display='block';
+  document.getElementById('qResult').style.display='none';
+  document.getElementById('qFoot').style.display='flex';
+}
+
+function pick(el,idx){
+  document.querySelectorAll('.quiz-opt').forEach(function(o){o.classList.remove('selected');});
+  el.classList.add('selected');
+  answers[current]=idx;
+  document.getElementById('qNextBtn').className='quiz-next on';
+}
+
+function qNext(){
+  if(current===-1){current=0;renderQ();return;}
+  if(answers[current]===undefined) return;
+  if(current<QS.length-1){current++;renderQ();}
+  else showResult();
+}
+
+function qBack(){
+  if(current>0){current--;renderQ();}
+  else{current=-1;showIntro();}
+}
+
+function showResult(){
+  var r=getResult();
+  document.getElementById('qFill').style.width='100%';
+  document.getElementById('qBody').style.display='none';
+  document.getElementById('qFoot').style.display='none';
+  var res=document.getElementById('qResult');
+  res.style.display='block';
+  res.innerHTML='<div class="result-eyes">'+r.eyes+'</div>'
+    +'<div class="result-tag">'+r.tag+'</div>'
+    +'<div class="result-title" style="color:'+r.color+'">'+r.title+'</div>'
+    +'<div class="result-desc">'+r.desc+'</div>'
+    +'<a class="result-cta" href="'+r.link+'" target="_blank">'+r.cta+' \u2192</a>'
+    +'<span class="result-retake" onclick="retake()">Retake the quiz</span>';
+}
+
+function retake(){
+  answers=[];current=-1;
+  showIntro();
+}
+
+showIntro();
+</script>
+</body>
+</html>
