@@ -149,7 +149,10 @@ footer{position:relative;z-index:1;border-top:0.5px solid var(--bord);padding:36
 
 @media(max-width:600px){
   nav{padding:10px 16px;flex-wrap:wrap;gap:8px;}
-  .nav-tabs{gap:3px;}.nav-tab{font-size:9px;padding:6px 10px;}
+  .nav-brand{flex-direction:row;gap:5px;width:100%;justify-content:center;}
+  .nav-tabs{gap:3px;flex-wrap:nowrap;width:100%;justify-content:center;}.nav-tab{font-size:8px;letter-spacing:0.04em;padding:5px 7px;}
+  .lt-hero{padding-top:28px;}
+  .start-box{margin-bottom:32px !important;}
   .page{padding:28px 16px 48px;}
   .quiz-body{padding:22px 16px 16px;}.quiz-foot{padding:12px 16px;}
   .result-card{padding:24px 16px;}
@@ -201,7 +204,7 @@ footer{position:relative;z-index:1;border-top:0.5px solid var(--bord);padding:36
   </div>
 
   <div class="page" style="padding-top:0;">
-    <div style="background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(244,114,182,0.07));border:0.5px solid var(--purple-border);border-radius:12px;padding:16px 20px;margin-bottom:16px;text-align:center;">
+    <div class="start-box" style="background:linear-gradient(135deg,rgba(192,132,252,0.1),rgba(244,114,182,0.07));border:0.5px solid var(--purple-border);border-radius:12px;padding:16px 20px;margin-bottom:16px;text-align:center;">
       <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--txt);margin-bottom:4px;letter-spacing:0.06em;">Not sure where to start?</div>
       <div style="font-family:'Georgia',serif;font-size:13px;font-style:italic;color:var(--muted);margin-bottom:12px;">Take the quiz and find your path in under 2 minutes.</div>
       <button onclick="switchTab('quiz',document.querySelectorAll('.nav-tab')[1])" style="font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;background:linear-gradient(135deg,var(--purple2),var(--pink2));color:#fff;border:none;border-radius:999px;padding:10px 24px;cursor:pointer;">Take the Quiz to Find Your Path ✨</button>
@@ -619,6 +622,12 @@ function retake(){
 }
 
 showIntro();
+</script>
+<script>
+/* Keep page content below the fixed header, whatever height it wraps to */
+(function(){var h=document.querySelector('.sticky-header'),c=document.querySelector('.content-wrap');
+function fit(){if(h&&c)c.style.paddingTop=(h.offsetHeight+8)+'px';}
+fit();window.addEventListener('load',fit);window.addEventListener('resize',fit);})();
 </script>
 </body>
 </html>
